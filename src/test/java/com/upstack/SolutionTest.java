@@ -93,4 +93,41 @@ public class SolutionTest {
         assertFalse(td1 < td2);
     }
 
+    @Test
+    public void testcase12() {
+        String expected = "";
+        int[] input = new int[100000];
+        for (int i=0; i < input.length; i++) {
+            int num = (int) Math.round(Math.random() * 100);
+            int repeat = (int) Math.round(Math.random() * 10);
+            for (int j = 0; j <= repeat; j++) {
+                if (i >= input.length) {
+                    break;
+                } else {
+                    input[i] = num;
+                    i++;
+                }
+            }
+        }
+
+        long t1 = System.currentTimeMillis();
+        for (int i=0; i < input.length; i++) {
+            int count = 1;
+            while (i + 1 < input.length && input[i] == input[i + 1]) {
+                i++;
+                count++;
+            }
+            expected +=  count > 1 ? " " + input[i] + " FOR " + count: " " + input[i];
+        }
+        long t2 = System.currentTimeMillis();
+        String  result = new Solution().formatString(input);
+        long t3 = System.currentTimeMillis();
+        assertEquals(result, expected.trim());
+        long td1 = t2-t1;
+        long td2 = t3-t2;
+        System.out.println("Time using normal for loop: " + td1);
+        System.out.println("Time using normal divide and concrete: " + td2);
+        assertFalse(td1 < td2);
+    }
+
 }
