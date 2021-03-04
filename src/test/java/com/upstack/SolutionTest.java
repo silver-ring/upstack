@@ -88,9 +88,9 @@ public class SolutionTest {
         assertEquals(result, expected.trim());
         long td1 = t2-t1;
         long td2 = t3-t2;
-        System.out.println(td1);
-        System.out.println(td2);
-        assertTrue(t2-t1 > t3-t2);
+        System.out.println("Time using normal for loop: " + td1);
+        System.out.println("Time using normal divide and concrete: " + td2);
+        assertFalse(td1 < td2);
     }
 
 }
