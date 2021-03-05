@@ -2,6 +2,8 @@ package com.upstack;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SolutionTest {
@@ -110,6 +112,31 @@ public class SolutionTest {
             }
         }
 
+        long t1 = System.currentTimeMillis();
+        for (int i=0; i < input.length; i++) {
+            int count = 1;
+            while (i + 1 < input.length && input[i] == input[i + 1]) {
+                i++;
+                count++;
+            }
+            expected +=  count > 1 ? " " + input[i] + " FOR " + count: " " + input[i];
+        }
+        long t2 = System.currentTimeMillis();
+        String  result = new Solution().formatString(input);
+        long t3 = System.currentTimeMillis();
+        assertEquals(result, expected.trim());
+        long td1 = t2-t1;
+        long td2 = t3-t2;
+        System.out.println("Time using normal for loop: " + td1);
+        System.out.println("Time using normal divide and concrete: " + td2);
+        assertFalse(td1 < td2);
+    }
+
+    @Test
+    public void testcase13() {
+        String expected = "";
+        int[] input = new int[100000];
+        Arrays.fill(input, 5);
         long t1 = System.currentTimeMillis();
         for (int i=0; i < input.length; i++) {
             int count = 1;
